@@ -8,7 +8,8 @@ var bodyParser = require('body-parser');
 mongoose.connect('mongodb://admin:password@ds111441.mlab.com:11441/annasdb');
 app.use(bodyParser.urlencoded({'extended':'true'}));
 app.use(bodyParser.json());
-app.use(bodyParser.json({ type: 'application/vnd.api+json' }))
+app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
+app.use(express.static('public'));
 
 //listen (start app)
 app.listen(3000);
@@ -38,9 +39,14 @@ app.post('/api/todos', function(req, res){
 app.delete('/api/todos/:todo_id', function(req, res){
 	Todo.remove({
 		_id : req.params.todo_id
-	} function(err, todo){
+	}, function(err, todo){
 		res.send(todo);
 	})
 });
+
+app.get('*', function(req, res){
+	res.sendfile('./public/index.html')
+})
+
 
 console.log("App listening on port 3000");

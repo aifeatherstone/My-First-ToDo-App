@@ -22,8 +22,8 @@ var Todo = mongoose.model('Todo', {
 //api
 
 app.get('/api/todos',function(req, res){
-	Todo.find(function(err, todos){
-		res.json(todos);
+	Todo.find(function(err, todo){
+		res.json(todo);
 	})
 });
 

@@ -11,10 +11,16 @@
 
 <body ng-controller="myCtrl">
 	<h1>Hello World!</h1>
+	<p>Add your To Do item!</p>
+
+	<form>
+	<input type="text" ng-model="formData.text" />
+	<button type="submit" ng-click="createTodo()">Add ToDo</button>
+	</form>
 
 	<h2>To Do List</h2>
 	<ul>
-		<li ng-repeat="todo in todos">{{todo.text}}</li>
+		<li ng-click="deleteTodo(todo._id)" ng-repeat="todo in todos">{{todo.text}}</li>
 	</ul>
 
 </body>

@@ -22,8 +22,8 @@ var Todo = mongoose.model('Todo', {
 //api
 
 app.get('/api/todos',function(req, res){
-	Todo.find(function(err, todo){
-		res.json(todo);
+	Todo.find(function(err, todos){
+		res.json(todos);
 	})
 });
 
@@ -31,16 +31,19 @@ app.post('/api/todos', function(req, res){
  	Todo.create({
  		text: req.body.text
  	}, function(err, todo){
- 		console.log(todo);
+ 		Todo.find(function(err, todos){
+			res.json(todos);
+		})
  	});
- 	res.send('worked');
 });
 
 app.delete('/api/todos/:todo_id', function(req, res){
 	Todo.remove({
 		_id : req.params.todo_id
 	}, function(err, todo){
-		res.send(todo);
+		Todo.find(function(err, todos){
+			res.json(todos);
+		})
 	})
 });
 
